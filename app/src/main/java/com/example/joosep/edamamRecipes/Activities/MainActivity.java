@@ -76,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 TextView source = (TextView) View.findViewById(R.id.sourceTextView);
                 TextView txtTitle = (TextView) View.findViewById(R.id.item);
                 txtTitle.setText(this.getItem(position).getRecipeName());
-                source.setText(this.getItem(position).getSource());
+                //source.setText(this.getItem(position).getSource());
+                source.setText("");
                 Picasso.with(getApplicationContext()).load(this.getItem(position).getRecipeImageUrl()).into(imageview);
 
-                extraTxt.setText("read more at: " + this.getItem(position).getRecipeImageUrl());
+                extraTxt.setText("read more at: " + this.getItem(position).getRecipeUrl());
 
                 return View;
             }

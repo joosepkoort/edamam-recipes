@@ -53,7 +53,7 @@ public class FavouritesActivity extends AppCompatActivity {
                 txtTitle.setText(this.getItem(position).getRecipeName());
                 Picasso.with(FavouritesActivity.this).load(this.getItem(position).getRecipeImageUrl()).into(imageview);
 
-                extraTxt.setText("read more at: " + this.getItem(position).getRecipeImageUrl());
+                extraTxt.setText("read more at: " + this.getItem(position).getRecipeUrl());
 
                 return View;
             }
