@@ -2,6 +2,7 @@ package com.example.joosep.edamamRecipes.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -70,14 +71,29 @@ public class MainActivity extends AppCompatActivity {
                 View View = inflater.inflate(R.layout.mylist, null, true);
 
                 ImageView imageview = (ImageView) View.findViewById(R.id.logo);
-
+                final String web = this.getItem(position).getRecipeUrl();
                 setImage(View, imageview, position);
                 TextView extraTxt = (TextView) View.findViewById(R.id.textView1);
                 TextView source = (TextView) View.findViewById(R.id.sourceTextView);
-                TextView txtTitle = (TextView) View.findViewById(R.id.item);
+                final TextView txtTitle = (TextView) View.findViewById(R.id.item);
                 txtTitle.setText(this.getItem(position).getRecipeName());
+
+
+                txtTitle.setOnClickListener(new View.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(android.view.View view) {
+                        String url = web;
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+
+                    }
+                });
                 //source.setText(this.getItem(position).getSource());
                 source.setText("");
+
                 Picasso.with(getApplicationContext()).load(this.getItem(position).getRecipeImageUrl()).into(imageview);
 
                 extraTxt.setText("read more at: " + this.getItem(position).getRecipeUrl());
@@ -86,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
+
+
         ListView conferences = findViewById(R.id.listView);
         conferences.setAdapter(listAdapter);
         conferences.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
